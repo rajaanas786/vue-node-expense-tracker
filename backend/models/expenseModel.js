@@ -17,9 +17,10 @@ const addExpense = (expenseData, callback) => {
 };
 
 //get all the expenses
-const getAllExpenses = (callback) => {
-  const query = "SELECT * FROM expenses ORDER BY date DESC";
 
+const getAllExpenses = (callback) => {
+  const query =
+    "SELECT * FROM expenses WHERE is_deleted = 0 ORDER BY date DESC";
   db.query(query, (err, results) => {
     if (err) return callback(err);
     callback(null, results);

@@ -1,3 +1,5 @@
+const db = require("../config/db");
+
 const { addExpense } = require("../models/expenseModel");
 const { getAllExpenses } = require("../models/expenseModel");
 
@@ -28,4 +30,14 @@ const fetchAllExpenses = (req, res) => {
   });
 };
 
-module.exports = { createExpense, fetchAllExpenses };
+const deleteExpense = (req, res) => {
+  const id = req.params.id;
+  const query = "UPDATE expenses SET is_deleted = 1 WHERE id = ?";
+
+  db.query(query, [id], (err, result) => {
+    if (err) return res.status(500).json({ message: "DB Error" });
+    res.status(200).json({ message: "✅ Expense soft-deleted successfully" });
+  });
+};
+
+module.exports = { createExpense, fetchAllExpenses, deleteExpense };
