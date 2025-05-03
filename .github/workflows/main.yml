@@ -43,8 +43,8 @@ jobs:
 
       - name: Done!
         run: echo "✅ Fullstack app built successfully!"
- - name: Trigger Render Deployment via API
+    - name: Trigger Render Deployment via API
       run: |
-        curl -X POST https://api.render.com/v1/services/${{ secrets.srv-d0augduuk2gs73c6t4j0 }}/deploys \
-          -H "Authorization: Bearer ${{ secrets.rnd_PCZ3VDGi9qBpUKbyLT0vnEeO8M3A }}" \
+        curl -X POST https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys \
+          -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
           -H "Accept: application/json"
